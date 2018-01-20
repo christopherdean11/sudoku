@@ -21,9 +21,7 @@ def main():
     # print(mypuzzle.find_missing(mypuzzle.get_section(start.name, start.loc)))
 
 
-def set_temp_values(section: list, position: int, temp_vals: list)->list:
-    section[position] = temp_vals
-    return section
+
 
 
 if __name__ == "__main__":

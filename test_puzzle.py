@@ -1,11 +1,14 @@
-from unittest import TestCase
-
 import puzzle
+import solver
 import header
 
 
 def get_puzzle_obj():
     return puzzle.Puzzle()
+
+
+def get_solver():
+    return solver.Solver()
 
 
 def make_valid_puzzle(solved: bool):
@@ -79,49 +82,57 @@ def test_get_row():
     # create a fake List[][] and get a row
     test_list = [[1, 1, 1], [2, 2, 2], [3, 3, 3]]
 
-    testpuz = get_puzzle_obj()
+    testpuz = get_solver()
     testpuz.puzzle = test_list
 
-    assert testpuz.get_row(0) == [1, 1, 1]
-    assert testpuz.get_row(1) == [2, 2, 2]
+    section = header.Section('row', 0)
+    assert testpuz.get_section(section=section) == [1, 1, 1]
+
+    section = header.Section('row', 1)
+    assert testpuz.get_section(section=section) == [2, 2, 2]
 
 
 def test_get_col():
     # use [1 for _ in range(9)]
     test_list = [[1, 1, 1], [2, 2, 2], [3, 3, 3]]
-
-    testpuz = get_puzzle_obj()
+    testpuz = get_solver()
     testpuz.puzzle = test_list
 
-    assert testpuz.get_col(0) == [1, 2, 3]
-    assert testpuz.get_col(1) == [1, 2, 3]
+    section = header.Section('col', 0)
+    assert testpuz.get_section(section=section) == [1, 2, 3]
+
+    section = header.Section('col', 1)
+    assert testpuz.get_section(section=section) == [1, 2, 3]
 
 
 def test_get_square():
 
-    # get puzzle object to inherit functions
-    testpuz = get_puzzle_obj()
-    # replace puzzle with test puzzle
+    testpuz = get_solver()
     testpuz.puzzle = make_test_puzzle('flatrow', False)
 
-    assert testpuz.get_square(0) == [1, 1, 1, 2, 2, 2, 3, 3, 3]
-    assert testpuz.get_square(5) == [4, 4, 4, 5, 5, 5, 6, 6, 6]
-    assert testpuz.get_square(8) == [7, 7, 7, 8, 8, 8, 9, 9, 9]
+    section = header.Section('square', 0)
+    assert testpuz.get_section(section=section) == [1, 1, 1, 2, 2, 2, 3, 3, 3]
+
+    section = header.Section('square', 5)
+    assert testpuz.get_section(section=section) == [4, 4, 4, 5, 5, 5, 6, 6, 6]
+
+    section = header.Section('square', 8)
+    assert testpuz.get_section(section=section) == [7, 7, 7, 8, 8, 8, 9, 9, 9]
 
 
 def test_find_missing():
-    testpuz = get_puzzle_obj()
+    testpuz = get_solver()
     testpuz.puzzle = [[1, 2, 0, 4, 0, 6, 0, 8, 9]]
 
     s = header.Section('row', 0)
-    result = testpuz.find_missing(s)
+    result = testpuz.find_missing(section_to_search=s)
 
     assert result.values == [3, 5, 7]
     assert result.locations == [2, 4, 6]
 
 
 def test_fewest_missing():
-    testpuz = get_puzzle_obj()
+    testpuz = get_solver()
     testpuz.puzzle = make_valid_puzzle(solved=False)
 
     result = testpuz.fewest_missing()
