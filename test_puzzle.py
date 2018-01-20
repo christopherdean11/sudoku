@@ -1,13 +1,41 @@
 from unittest import TestCase
 
 import puzzle
+import header
 
 
 def get_puzzle_obj():
     return puzzle.Puzzle()
 
 
-def make_puzzle(mode: str, zero_slant: bool) -> list:
+def make_valid_puzzle(solved: bool):
+    """
+    creates a valid, solved sudoku puzzle
+    :return: a valid solved puzzle
+    """
+    puz = [[1, 2, 3, 4, 5, 6, 7, 8, 9],
+           [4, 5, 6, 7, 8, 9, 1, 2, 3],
+           [7, 8, 9, 1, 2, 3, 4, 5, 6],
+           [2, 3, 1, 5, 6, 4, 8, 9, 7],
+           [5, 6, 4, 8, 9, 7, 2, 3, 1],
+           [8, 9, 7, 2, 3, 1, 5, 6, 4],
+           [3, 1, 2, 6, 4, 5, 9, 7, 8],
+           [6, 4, 5, 9, 7, 8, 3, 1, 2],
+           [9, 7, 8, 3, 1, 2, 6, 4, 5]]
+
+    if not solved:
+        for x in range(9):
+            puz[x][x] = 0
+        for x in range(8):
+            puz[x+1][x] = 0
+        for x in range(4):
+            puz[x][x+5] = 0
+        for x in range(4):
+            puz[x+5][x] = 0
+    return puz
+
+
+def make_test_puzzle(mode: str, zero_slant: bool) -> list:
     """
     generate a false puzzle to prove functions work
     :param mode: str - seqrow for sequential rows (1-9 for each row)
@@ -74,7 +102,7 @@ def test_get_square():
     # get puzzle object to inherit functions
     testpuz = get_puzzle_obj()
     # replace puzzle with test puzzle
-    testpuz.puzzle = make_puzzle('flatrow', False)
+    testpuz.puzzle = make_test_puzzle('flatrow', False)
 
     assert testpuz.get_square(0) == [1, 1, 1, 2, 2, 2, 3, 3, 3]
     assert testpuz.get_square(5) == [4, 4, 4, 5, 5, 5, 6, 6, 6]
@@ -83,10 +111,21 @@ def test_get_square():
 
 def test_find_missing():
     testpuz = get_puzzle_obj()
+    testpuz.puzzle = [[1, 2, 0, 4, 0, 6, 0, 8, 9]]
 
-    section = [1, 2, 0, 4, 0, 6, 0, 8, 9]
-    result = testpuz.find_missing(section)
+    s = header.Section('row', 0)
+    result = testpuz.find_missing(s)
+
     assert result.values == [3, 5, 7]
     assert result.locations == [2, 4, 6]
 
+
+def test_fewest_missing():
+    testpuz = get_puzzle_obj()
+    testpuz.puzzle = make_valid_puzzle(solved=False)
+
+    result = testpuz.fewest_missing()
+    assert result == header.Section('square', 1)
+    # assert result.type == 'row'
+    # assert result.idx == 0
 

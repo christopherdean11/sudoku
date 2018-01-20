@@ -13,9 +13,11 @@ def main():
     """
     mypuzzle = puz.Puzzle()
     start = mypuzzle.fewest_missing()
-    print(start.name, start.loc)
-    mypuzzle.get_section()
-    mypuzzle.find_missing()
+    print('start location: ', start.type, start.idx)
+    # set_temp_values()
+
+    # mypuzzle.get_section()
+    # mypuzzle.find_missing()
     # print(mypuzzle.find_missing(mypuzzle.get_section(start.name, start.loc)))
 
 

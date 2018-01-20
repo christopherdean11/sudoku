@@ -1,4 +1,4 @@
 from collections import namedtuple
 
-Startpos = namedtuple('Start', 'name loc')
+Section = namedtuple('Section', 'type idx')
 Missing = namedtuple('MissingValues', 'values locations')
