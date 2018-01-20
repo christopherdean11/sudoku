@@ -1,0 +1,5 @@
+{
+  "test_puzzle.py::TestPuzzle::test_puzzle_matches": true,
+  "test_puzzle.py::test_find_missing_col": true,
+  "test_puzzle.py::test_find_missing_square": true
+}
