@@ -23,6 +23,7 @@ class Puzzle:
                        [0, 8, 7, 1, 2, 0, 3, 6, 4],
                        [0, 9, 3, 0, 0, 6, 0, 0, 0]]
 
+    """
     def __repr__(self):
         out = []
         for x in range(9):
@@ -38,3 +39,4 @@ class Puzzle:
                 out.append('\n------------')
             out.append('\n')
         return ''.join([str(x) for x in out])
+    """
