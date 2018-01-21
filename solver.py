@@ -72,7 +72,6 @@ class Solver(Puzzle):
     def check_values(self):
         pass
 
-
     def fewest_missing(self) -> header.Section:
         """
         return a Section type with the least amount of empty spaces
