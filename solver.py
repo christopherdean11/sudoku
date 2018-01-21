@@ -6,7 +6,11 @@ from puzzle import Puzzle
 class Solver(Puzzle):
 
     def get_section(self, section: header.Section) -> list:
-
+        """
+        Get a section slice of the puzzle as a list to do operations on
+        :param section: sectionID (row/col/square, index)
+        :return: flat 1D list with 9 elements
+        """
         # extract row as list
         if section.type == 'row':
             return solver_helper.get_row(self.puzzle, section.idx)
@@ -20,6 +24,12 @@ class Solver(Puzzle):
             return solver_helper.get_square(self.puzzle, section.idx)
 
     def put_section(self, section: header.Section, flat_list: list):
+        """
+        Put a section back into the puzzle
+        :param section: sectionID (row/col/square, index)
+        :param flat_list: section slice as a list
+        :return: none, written to self.puzzle
+        """
 
         if section.type == 'row':
             # insert row into puzzle
@@ -34,6 +44,30 @@ class Solver(Puzzle):
             hstart, hstop, vstart, vstop = solver_helper.get_square_bounds(section.idx)
             for i, x in enumerate(range(vstart, vstop)):
                 self.puzzle[x][hstart:hstop] = flat_list[i*3:i*3+3]
+
+    def set_temp_values(self, section: header.Section):
+        """
+        set temporary values in sublist in puzzle
+        :param section: sectionID (row/col/square, index)
+        :return: none, written to self.puzzle
+        """
+        # go to Section
+        # find missing -> Missing(values, locs)
+        # set temps (need to convert flat list back into puzzle)
+
+        # missing_values -> header.Missing(values: list, locations: list)
+        missing_values = self.find_missing(section)
+
+        # get the section slice of the puzzle
+        s = self.get_section(section)
+
+        # for each empty space in the puzzle section
+        for loc in missing_values.locations:
+            # write all possible values in location as a list
+            s[loc] = missing_values.values
+
+        # write new list with temps to puzzle
+        self.put_section(section, s)
 
     def fewest_missing(self) -> header.Section:
         """

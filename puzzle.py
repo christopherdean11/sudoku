@@ -24,16 +24,6 @@ class Puzzle:
                        [0, 9, 3, 0, 0, 6, 0, 0, 0]]
 
 
-
-    def set_temp_values(self, section: header.Section) -> list:
-        # go to Section
-        # find missing -> Missing(values, locs)
-        # set temps (need to convert flat list back into puzzle)
-        missingvalues = self.find_missing(section=section)
-        # for x in missingvalues.locations:
-
-        # return section
-
     def puzzle_print(self):
         for x in range(9):
             for y in range(9):

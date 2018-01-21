@@ -158,6 +158,8 @@ def test_put_col():
 
     s = header.Section('col', 0)
     test_list = [10 for _ in range(1, 10)]
+
+    # TEST FUNCTION
     testpuz.put_section(s, test_list)
 
     assert testpuz.get_section(s) == test_list
@@ -169,7 +171,48 @@ def test_put_square():
 
     s = header.Section('square', 0)
     test_list = [10 for _ in range(1, 10)]
+
+    # TEST FUNCTION
     testpuz.put_section(s, test_list)
 
     assert testpuz.get_section(s) == test_list
     assert testpuz.get_section(header.Section('row', 0)) == [10, 10, 10, 1, 1, 1, 1, 1, 1]
+
+
+def test_set_temp_values_row():
+    testpuz = get_solver()
+
+    # 1 row puzzle with 1,3,9 missing
+    testpuz.puzzle = [[0, 2, 0, 4, 5, 6, 7, 8, 0]]
+    s = header.Section('row', 0)
+
+    # TEST FUNCTION
+    testpuz.set_temp_values(s)
+
+    assert testpuz.get_section(s) == [[1, 3, 9], 2, [1, 3, 9], 4, 5, 6, 7, 8, [1, 3, 9]]
+    # assert testpuz.get_section(header.Section('row', 0)) == [10, 10, 10, 1, 1, 1, 1, 1, 1]
+
+
+def test_set_temp_values_col():
+    testpuz = get_solver()
+
+    # 1 column puzzle with 2, 4, 6, missing
+    testpuz.puzzle = [[1], [0], [3], [0], [5], [0], [7], [8], [9]]
+
+    s = header.Section('col', 0)
+
+    # TEST FUNCTION
+    testpuz.set_temp_values(s)
+
+    assert testpuz.get_section(s) == [1, [2, 4, 6], 3, [2, 4, 6], 5, [2, 4, 6], 7, 8, 9]
+
+
+def test_set_temp_values_square():
+    testpuz = get_solver()
+
+    # 1 square puzzle with 5,7,8 missing
+    testpuz.puzzle = [[1, 2, 3], [4, 0, 6], [0, 0, 9]]
+    s = header.Section('square', 0)
+    testpuz.set_temp_values(s)
+
+    assert testpuz.get_section(s) == [1, 2, 3, 4, [5, 7, 8], 6, [5, 7, 8], [5, 7, 8], 9]
