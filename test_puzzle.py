@@ -140,3 +140,24 @@ def test_fewest_missing():
     # assert result.type == 'row'
     # assert result.idx == 0
 
+
+def test_put_row():
+    testpuz = get_solver()
+    testpuz.puzzle = make_test_puzzle('flatrow', False)
+
+    s = header.Section('row', 0)
+    test_list = [10 for _ in range(1,10)]
+    testpuz.put_section(s, test_list)
+
+    assert testpuz.get_section(s) == test_list
+
+
+def test_put_col():
+    testpuz = get_solver()
+    testpuz.puzzle = make_test_puzzle('flatrow', False)
+
+    s = header.Section('col', 0)
+    test_list = [10 for _ in range(1, 10)]
+    testpuz.put_section(s, test_list)
+
+    assert testpuz.get_section(s) == test_list

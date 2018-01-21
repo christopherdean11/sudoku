@@ -27,8 +27,8 @@ class Solver(Puzzle):
 
         if section.type == 'col':
             # for each row, update index "idx" with flat_list[row_n]
-            for row in self.puzzle:
-                row[section.idx] = flat_list[row]
+            for i, row in enumerate(self.puzzle):
+                row[section.idx] = flat_list[i]
 
         if section.type == 'square':
             raise NotImplementedError
