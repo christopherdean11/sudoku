@@ -23,18 +23,18 @@ class Puzzle:
                        [0, 8, 7, 1, 2, 0, 3, 6, 4],
                        [0, 9, 3, 0, 0, 6, 0, 0, 0]]
 
-
-    def puzzle_print(self):
+    def __repr__(self):
+        out = []
         for x in range(9):
             for y in range(9):
 
                 if (y % 3 == 0) and y > 0:
-                    print('| ', end='')
+                    out.append('|')
                 if self.puzzle[x][y] == 0:
                     self.puzzle[x][y] = ' '
-                print(self.puzzle[x][y], end=' ')
+                out.append(self.puzzle[x][y])
 
             if ((x + 1) % 3 == 0) and x < 8:
-                print('\n----------------------', end='')
-            print('')
-            # print(' '.join(map(str, puz[x])))
+                out.append('\n------------')
+            out.append('\n')
+        return ''.join([str(x) for x in out])

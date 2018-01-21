@@ -69,6 +69,10 @@ class Solver(Puzzle):
         # write new list with temps to puzzle
         self.put_section(section, s)
 
+    def check_values(self):
+        pass
+
+
     def fewest_missing(self) -> header.Section:
         """
         return a Section type with the least amount of empty spaces
