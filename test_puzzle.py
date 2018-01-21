@@ -161,3 +161,15 @@ def test_put_col():
     testpuz.put_section(s, test_list)
 
     assert testpuz.get_section(s) == test_list
+
+
+def test_put_square():
+    testpuz = get_solver()
+    testpuz.puzzle = make_test_puzzle('flatrow', False)
+
+    s = header.Section('square', 0)
+    test_list = [10 for _ in range(1, 10)]
+    testpuz.put_section(s, test_list)
+
+    assert testpuz.get_section(s) == test_list
+    assert testpuz.get_section(header.Section('row', 0)) == [10, 10, 10, 1, 1, 1, 1, 1, 1]

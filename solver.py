@@ -31,7 +31,9 @@ class Solver(Puzzle):
                 row[section.idx] = flat_list[i]
 
         if section.type == 'square':
-            raise NotImplementedError
+            hstart, hstop, vstart, vstop = solver_helper.get_square_bounds(section.idx)
+            for i, x in enumerate(range(vstart, vstop)):
+                self.puzzle[x][hstart:hstop] = flat_list[i*3:i*3+3]
 
     def fewest_missing(self) -> header.Section:
         """
