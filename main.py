@@ -5,6 +5,7 @@ testing out finding missing values in a puzzle row
 import header
 import solver
 import sections
+import copy
 
 
 def main():
@@ -20,7 +21,7 @@ def main():
     col = s.make('col')
     sq = s.make('sq')
 
-    # prettyprintpuzzle(pz.copy())
+    prettyprintpuzzle(copy.deepcopy(pz))
 
     set_temp_vals(solv, row)
 
