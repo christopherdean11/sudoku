@@ -1,5 +1,5 @@
+[![Build Status](https://travis-ci.org/christopherdean11/sudoku.svg?branch=master)](https://travis-ci.org/christopherdean11/sudoku)
 ## Sudoku Solver ##
-
 Solves a sudoku puzzle and prints the before and after
 
 #### Usage ####
