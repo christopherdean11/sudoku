@@ -124,8 +124,9 @@ def test_find_missing():
     testpuz = get_solver()
     testpuz.puzzle = [[1, 2, 0, 4, 0, 6, 0, 8, 9]]
 
-    s = header.Section('row', 0)
-    result = testpuz.find_missing(section_to_search=s)
+    # s = header.Section('row', 0)
+    row = testpuz.Row()
+    result = testpuz.find_missing(row[0])
 
     assert result.values == [3, 5, 7]
     assert result.locations == [2, 4, 6]

@@ -20,7 +20,7 @@ class Solver:
             self.__check_temp_vals(self.col)
             self.__check_temp_vals(self.sq)
             i += 1
-        print('completed in {} rounds\n'.format(i))
+        # print('completed in {} rounds\n'.format(i))
 
 
     def is_puzzle_complete(self):
