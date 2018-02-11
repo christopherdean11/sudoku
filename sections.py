@@ -1,7 +1,19 @@
-from puzzle import Puzzle
 
 
-class Row(Puzzle):
+class Sections:
+    def __init__(self, puzzle):
+        self.puzzle = puzzle
+
+    def make(self, stype):
+        if stype == 'row':
+            return Row(self.puzzle)
+        elif stype == 'col':
+            return Column(self.puzzle)
+        elif stype == 'sq':
+            return Square(self.puzzle)
+
+
+class Row:
 
     def __init__(self, puzzle):
         self.puzzle = puzzle
@@ -13,8 +25,7 @@ class Row(Puzzle):
         self.puzzle[key] = value
 
 
-class Column(Puzzle):
-    # TODO: not sure if this inheritance is needed???
+class Column:
     def __init__(self, puzzle):
         self.puzzle = puzzle
 
@@ -30,7 +41,7 @@ class Column(Puzzle):
             row[key] = value[i]
 
 
-class Square(Puzzle):
+class Square:
 
     def __init__(self, puzzle):
         self.puzzle = puzzle
