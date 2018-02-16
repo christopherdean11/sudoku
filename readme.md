@@ -1,6 +1,10 @@
-[![Build Status](https://travis-ci.org/christopherdean11/sudoku.svg?branch=master)](https://travis-ci.org/christopherdean11/sudoku)
 ## Sudoku Solver ##
-Solves a sudoku puzzle and prints the before and after
+[![Build Status](https://travis-ci.org/christopherdean11/sudoku.svg?branch=master)](https://travis-ci.org/christopherdean11/sudoku)
+[![codecov](https://codecov.io/gh/christopherdean11/sudoku/branch/master/graph/badge.svg)](https://codecov.io/gh/christopherdean11/sudoku)
+
+Solves a sudoku puzzle and prints the before and after.
+
+_Note: This is not meant to be a fully optimized implementation, but a mechanism for learning._
 
 #### Usage ####
 Create a new instance of Solver(), passing the puzzle as a 2D list during initialization.  

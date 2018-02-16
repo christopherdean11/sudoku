@@ -22,7 +22,6 @@ class Solver:
             i += 1
         # print('completed in {} rounds\n'.format(i))
 
-
     def is_puzzle_complete(self):
 
         r = self.__is_sectiontype_valid(self.row)
@@ -62,7 +61,7 @@ class Solver:
     def __set_temp_vals(self, section_type):
 
         for r in range(0, 9):
-            msgv = self.find_missing(section_type[r])
+            msgv = self.__find_missing(section_type[r])
 
             for l in msgv.locations:
                 temps = []
@@ -83,7 +82,6 @@ class Solver:
                             badvals.append(tempv)
                     self.__remove_invalid_temps(section_type, index, subidx, badvals)
 
-
     def __remove_invalid_temps(self, section_type, idx, subidx, badvals):
         s = section_type[idx]
         for val in badvals:
@@ -100,11 +98,11 @@ class Solver:
                     s[i] = el[0]
                     section_type[n] = s
 
-    def find_missing(self, section: list) -> header.Missing:
+    def __find_missing(self, section: list) -> header.Missing:
         """
         find and return the missing values from a puzzle section as a list
         eventually implement this as the __len__ method on a puzzle Class for Square, Row, Column
-        :param section_to_search: puzzle section object (square, row, or column)
+        :param section: flat list, likely created by row/col/sq[x]
         :return namedtuple of type Missing(values, locations)
         """
         # Missing = namedtuple('MissingValues', 'values locations')
