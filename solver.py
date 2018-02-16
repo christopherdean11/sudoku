@@ -61,7 +61,7 @@ class Solver:
     def __set_temp_vals(self, section_type):
 
         for r in range(0, 9):
-            msgv = self.__find_missing(section_type[r])
+            msgv = self._find_missing(section_type[r])
 
             for l in msgv.locations:
                 temps = []
@@ -98,7 +98,7 @@ class Solver:
                     s[i] = el[0]
                     section_type[n] = s
 
-    def __find_missing(self, section: list) -> header.Missing:
+    def _find_missing(self, section: list) -> header.Missing:
         """
         find and return the missing values from a puzzle section as a list
         eventually implement this as the __len__ method on a puzzle Class for Square, Row, Column
