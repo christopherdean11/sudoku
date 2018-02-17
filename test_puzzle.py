@@ -1,4 +1,6 @@
 import solver
+import puzzle
+
 
 def test_get_row():
     # create a fake List[][] and get a row
@@ -33,3 +35,13 @@ def test_find_missing():
 
     assert testpuz._find_missing(test_list) == testpuz.Missing([3, 6, 7], [2, 5, 6])
 
+
+def test_top_level_solver():
+    testpuz = _get_puzzle(0)
+    s = solver.Solver(testpuz)
+    s.solve_puzzle()
+    assert s.is_puzzle_complete() is True
+
+
+def _get_puzzle(puznum):
+    return puzzle.get_puzzle(puznum)
