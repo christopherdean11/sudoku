@@ -1,5 +1,7 @@
-import header
+from collections import namedtuple
 from sections import Sections
+
+# Section = namedtuple('Section', 'type idx')
 
 
 class Solver:
@@ -9,6 +11,7 @@ class Solver:
         self.row = s.make('row')
         self.col = s.make('col')
         self.sq = s.make('sq')
+        self.Missing = namedtuple('MissingValues', 'values locations')
 
     def solve_puzzle(self):
         self.__set_temp_vals(self.row)
@@ -98,7 +101,7 @@ class Solver:
                     s[i] = el[0]
                     section_type[n] = s
 
-    def _find_missing(self, section: list) -> header.Missing:
+    def _find_missing(self, section: list):
         """
         find and return the missing values from a puzzle section as a list
         eventually implement this as the __len__ method on a puzzle Class for Square, Row, Column
@@ -106,7 +109,6 @@ class Solver:
         :return namedtuple of type Missing(values, locations)
         """
         # Missing = namedtuple('MissingValues', 'values locations')
-        Missing = header.Missing
         exists = []
         locs = []
         full_set = range(1, 10)
@@ -128,4 +130,4 @@ class Solver:
             if value not in exists:
                 missing.append(value)
 
-        return Missing(missing, locs)
+        return self.Missing(missing, locs)
